@@ -1,0 +1,4 @@
+/apex/APXTConga4__Conga_Composer?SolMgr=1
+&serverUrl={!API.Partner_Server_URL_370}
+&Id={!Opportunity.Id}
+&TemplateId=0T_004EAU530037

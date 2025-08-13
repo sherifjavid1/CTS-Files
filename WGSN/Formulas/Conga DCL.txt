@@ -1,0 +1,16 @@
+IF(
+	NOT($Permission.Allow_Sending_Conga_Contracts),
+	'You are not authorized to send contracts for signature via Conga', 
+
+	IF(
+		OR(
+			CONTAINS('Approval Required:Rejected', TEXT(Approval_Evergreen__c)),
+			CONTAINS('Approval Required:Rejected', TEXT(Approval_Status__c)),
+			CONTAINS('Approval Required:Rejected', TEXT(Payment_Terms_Approval_Status__c)),
+			CONTAINS('Approval Required:Rejected', TEXT(Request_Yes_Manual_Approval_Status__c))
+		),
+
+	'Please complete all pending/rejected approvals',
+
+	'')
+)

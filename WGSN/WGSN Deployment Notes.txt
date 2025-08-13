@@ -1,0 +1,8 @@
+1. Update Remote Site Setting in Conga Solution Setup tab
+2. Conga Email Template records needs to be manually migrated as it is not part of solution & it is related to conga trigger
+3. Conga Solution Imports create buttons again
+4. Conga Imports creates Duplicate queries as we are importing more than one solution
+5. When Conga email template is exported & Imported the Russian, Japanese & Chinese appears as ????(I manually updated the email body & subject in INT to get it running)     
+6. Need to configure Bussiness Units & Writ back tag configuration manually as a deployment step                          
+7. On Solution migration Conga Templates assigning different templates
+8. Need to do Automatic Configuration under Conga SIgn Setup as a initila Configuration

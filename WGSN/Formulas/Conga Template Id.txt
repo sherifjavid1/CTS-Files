@@ -1,0 +1,39 @@
+/*If New Business Opportunity*/
+IF( AND(RecordType.DeveloperName = 'New_Business', TEXT(StageName) = 'Commercial Negotiation', Renewal_Process__c = 'Manual'),
+
+    /*If New Business/Upsell/Professional Services Opportunity Type*/
+    IF(OR( TEXT(Type) = 'New Business', TEXT(Type) = 'Upsell', TEXT(Type) = 'Professional Services'), 
+
+        /*If Evergreen*/
+        IF(TEXT(Evergreen__c) = 'Yes', '0T_007EAU513201', 
+
+            /*Else If Not Evergreen*/
+            IF(TEXT(Evergreen__c) = 'NO', 'SCENARIO 3 TEMPLATE ID', '')),
+
+        /*Else If Upgrade In Contract Opportunity Type*/
+        IF(TEXT(Type) = 'Upgrade In Contract', 
+
+            /*If Evergreen*/
+            IF(TEXT(Evergreen__c) = 'Yes', 'SCENARIO 2 TEMPLATE ID', 
+
+                /*Else If Not Evergreen*/
+                IF(TEXT(Evergreen__c) = 'Yes', 'SCENARIO 4 TEMPLATE ID', '')))
+    ),
+
+    /*Else If Renewal Opportunity*/
+    IF( AND(RecordType.DeveloperName = 'Renewal', TEXT(Type) = 'Renewal'), 
+
+        /*If Manual Renewal Process & Stage Open Renewal*/
+        IF(AND(Renewal_Process__c = 'Manual', TEXT(StageName) = 'Open Renewal'), 
+
+            /*IF Evergreen*/
+            IF(TEXT(Evergreen__c) = 'Yes', 'SCENARIO 6 TEMPLATE ID',
+
+                /*Else If Not Evergreen*/
+                IF(TEXT(Evergreen__c) = 'No', 'SCENARIO 7 TEMPLATE ID'), ''),
+
+            /*Else If Automatic Renewal & Stage Customer Commitment*/
+            IF(AND(TEXT(Evergreen__c) = 'Yes', Renewal_Process__c = 'Automatic', TEXT(StageName) = 'Customer Commitment'), 'SCENARIO 5 TEMPLATE ID', '')
+        )
+    ,'')
+)

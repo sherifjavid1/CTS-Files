@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga Setup Master Change Set</fullName>
+    <description>Contains components related to Conga setup</description>
+    <types>
+        <members>Opportunity.Conga_DisableCongaLabel__c</members>
+        <members>Opportunity.Conga_DisableConga__c</members>
+        <members>Opportunity.Conga_Suppress_Appendix_1__c</members>
+        <members>Opportunity.Conga_Suppress_Pro_rated_Line__c</members>
+        <members>Opportunity.Conga_Suppress_Signature_Name_Date__c</members>
+        <members>Opportunity.Conga_TemplateID__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Allow_Sending_Conga_Contracts</members>
+        <name>CustomPermission</name>
+    </types>
+    <types>
+        <members>CLS4SF__Logo/WGSN_by_Ascential_Logo.jpg</members>
+        <name>Document</name>
+    </types>
+    <types>
+        <members>WGSN_Allow_Sending_Conga_Contracts</members>
+        <name>PermissionSet</name>
+    </types>
+    <version>48.0</version>
+</Package>

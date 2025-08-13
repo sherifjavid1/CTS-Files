@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Conga_DisableCongaLabel__c</fullName>
+        <description>The Conga disable label should not exceed 40 characters. Max. characters supported by Conga for DC Label is 40.</description>
+        <externalId>false</externalId>
+        <formula>IF(
+	NOT($Permission.Allow_Sending_Conga_Contracts),
+	&apos;You are not authorized to send contracts for signature via Conga&apos;, 
+
+	IF(
+		OR(
+			CONTAINS(TEXT(Approval_Evergreen__c), &apos;Approval Required:Rejected&apos;),
+			CONTAINS(TEXT(Approval_Status__c), &apos;Approval Required:Rejected&apos;),
+			CONTAINS(TEXT(Payment_Terms_Approval_Status__c), &apos;Approval Required:Rejected&apos;),
+			CONTAINS(TEXT(Request_Yes_Manual_Approval_Status__c), &apos;Approval Required:Rejected&apos;)
+		),
+
+	&apos;Please complete all pending/rejected approvals&apos;,
+
+	&apos;&apos;)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Conga (DCL - Disable Conga Label)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Conga_DisableConga__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+	NOT($Permission.Allow_Sending_Conga_Contracts), 
+
+	true,
+
+	IF(
+		OR(
+			ISPICKVAL(Approval_Evergreen__c, &apos;Approval Required&apos;),
+			ISPICKVAL(Approval_Evergreen__c, &apos;Rejected&apos;)
+			),
+		true,
+   		
+   		IF(
+   			OR(
+   				ISPICKVAL(Approval_Status__c, &apos;Approval Required&apos;),
+   				ISPICKVAL(Approval_Status__c, &apos;Rejected&apos;)
+   				),
+   			true,
+
+      		IF(
+      			OR(
+      				ISPICKVAL(Payment_Terms_Approval_Status__c, &apos;Approval Required&apos;), 
+      				ISPICKVAL(Payment_Terms_Approval_Status__c, &apos;Rejected&apos;)
+      				),
+      			true, 
+
+         		IF(
+         			OR(
+         				ISPICKVAL(Request_Yes_Manual_Approval_Status__c, &apos;Approval Required&apos;), 
+         				ISPICKVAL(Request_Yes_Manual_Approval_Status__c, &apos;Rejected&apos;)
+         				),
+         			true,
+
+         			false
+         			)
+         		)
+      		)
+   		)
+	)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Conga (DC - Disable Conga)</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Conga_Suppress_Appendix_1__c</fullName>
+        <description>This field is used to suppress the Appendix1 in the Conga template if the formula returns true</description>
+        <externalId>false</externalId>
+        <formula>IF(
+	AND(
+		RecordType.DeveloperName = &apos;Renewal&apos;,
+		Renewal_Process__c = &apos;Automatic&apos;,
+                TEXT(Evergreen__c) = &apos;Yes&apos;
+		), 
+
+	true,
+
+	false
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Conga Suppress Appendix 1</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Conga_Suppress_Pro_rated_Line__c</fullName>
+        <description>This field is used to suppress the Prorated line in the Conga template if the formula returns true</description>
+        <externalId>false</externalId>
+        <formula>IF(
+	AND(
+        OR(
+            RecordType.DeveloperName = &apos;New_Business&apos;,
+            RecordType.DeveloperName = &apos;Renewal&apos;
+        ),
+        TEXT(Type) &lt;&gt; &apos;Upgrade-In Contract&apos;
+	),
+
+	true,
+	
+	false
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Conga Suppress Pro-rated Line</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Conga_Suppress_Signature_Name_Date__c</fullName>
+        <description>This field is used to suppress the Signature, Name, Date line in the Conga template if the formula returns true</description>
+        <externalId>false</externalId>
+        <formula>IF(
+	AND(
+		RecordType.DeveloperName = &apos;Renewal&apos;, 
+		Renewal_Process__c = &apos;Automatic&apos;,
+                TEXT(Evergreen__c) = &apos;Yes&apos;
+	), 
+
+	true,
+	
+	false
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Conga Suppress Signature, Name &amp; Date</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Conga_TemplateID__c</fullName>
+        <externalId>false</externalId>
+        <formula>&apos;0T_007EAU513201&apos;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Conga Template ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>
