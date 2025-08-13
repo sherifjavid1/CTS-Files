@@ -1,0 +1,53 @@
+1. Git Status, if not initiated: git init
+2. Add remote origin: git remote add origin git@bitbucket.org:universityofwestminister/uow-salesforce.git
+3. git status
+4. Open connection to the authenticating agent: ssh-add -l
+5. If no agent found, add one: eval $(ssh-agent)
+6. Add agent identity: ssh-add ~/creation_bitbucket
+7. open connection: ssh-add -l
+8. git fetch
+9. git checkout origin/develop
+
+//Done below 3 steps since the status was 'head detached at origin/develop'
+10. git fetch
+11. git pull origin/develop
+12. git checkout origin/develop
+
+13.git pull
+
+14. Open package.xml, add files to be pushed and retrieve from Salesforce.
+15. Stage the retrieved files along with package.xml
+16. Create a local branch from origin/develop.
+17. Commit staged files to newly created local branch. Commit message- ticket name: ticket header.
+18. git push: git push origin 'local branch name'.
+19. Go to bitbucket & create pull request from the branch. 
+20. Add jira reference & other checklist.
+
+////Dan
+
+1. Update package.xml to add all components for your changes
+2. Make a copy of the package.xml
+3. Force checkout origin/develop
+4. git pull origin develop
+5. Create your feature branch
+6. Update package.xml on feature branch with your copy of package.xml
+7. Fetch from Salesforce.
+8. check in your changes in feature branch
+9. Add > Commit > Push
+
+
+
+//Steps to follow
+1. Switch to origin/develop
+2. git pull from origin/develop
+3. create feature branch
+4. Refresh package.xml from SF
+5. Checkin & commit changes
+
+
+//Resolve Conflicts
+git checkout <source-branch>
+git pull origin <source-branch>
+git pull origin <target-branch>
+Resolve the conflicts
+Add > commit > push to source-branch
